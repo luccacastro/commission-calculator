@@ -12,9 +12,17 @@ import {
 } from '../components'
 
 
+enum CommissionScheme {
+  Placeholder = 'placeholder',
+  Default = 'default',
+  Premium = 'premium',
+}
+
+
+
 const CommissionCalculatorWidget: React.FC = () => {
-  const [commissionScheme, setCommissionScheme] = useState<string>('placeholder');
-  const [revenue, setRevenue] = useState<number | "">("");
+  const [commissionScheme, setCommissionScheme] = useState<CommissionScheme>(CommissionScheme.Placeholder);
+  const [revenue, setRevenue] = useState<number | string>("");
   const [totalCommission, setTotalCommission] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
   const [bandBreakdown, setBandBreakdown] = useState<BandBreakdownItem[]>(PRICE_BREAKDOWN_PLACEHOLDER);
@@ -27,7 +35,7 @@ const CommissionCalculatorWidget: React.FC = () => {
 
   const resetWidgetState = () => {
     setRevenue("");
-    setCommissionScheme("Default");
+    setCommissionScheme(CommissionScheme.Default);
     setTotalCommission(0);
     setLoading(false);
   };
@@ -65,7 +73,7 @@ const CommissionCalculatorWidget: React.FC = () => {
   const fetchBreakdownData = async (revenue: number) => {
     setLoading(true);
     try {
-      const response = await axios.post('https://app-fragrant-silence-8555.fly.dev/calculate-commission', {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/calculate-commission`, {
         revenue: revenue,
         modelType: commissionScheme,
       });
@@ -84,14 +92,18 @@ const CommissionCalculatorWidget: React.FC = () => {
   };
 
   const handleCommissionSchemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCommissionScheme(e.target.value);
+    if (Object.values(CommissionScheme).includes(e.target.value as CommissionScheme)) {
+      setCommissionScheme(e.target.value as CommissionScheme);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/,/g, '');
-    if (value === "" || !isNaN(parseFloat(value))) {
-      const parsedValue = value === "" ? "" : parseFloat(value);
-      setRevenue(parsedValue);
+    let value = e.target.value.replace(/,/g, ''); // Remove commas from the input value
+  
+    // if (value === "") {
+    //   setRevenue(""); // If the input is empty, set revenue as an empty string
+    if(!isNaN(Number(value))) {
+      setRevenue(Number(value)); // If it's a valid number, set revenue as a number
     }
   };
 
@@ -113,7 +125,8 @@ const CommissionCalculatorWidget: React.FC = () => {
         </button>
       </div>
       <h2 className="text-3xl font-bold text-center text-blue-900">Commission Calculator</h2>
-      <div className="text-center text-gray-500 text-sm">
+      <div className="text-center text-    // Verify the breakdown values
+gray-500 text-sm">
         <p>Enter a revenue amount and select a commission scheme to calculate your potential commission based on different bracket ranges.</p>
       </div>
       <div className='flex w-full justify-center gap-4 mb-4'>
