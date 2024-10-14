@@ -73,6 +73,7 @@ const CommissionCalculatorWidget: React.FC = () => {
   const fetchBreakdownData = async (revenue: number) => {
     setLoading(true);
     try {
+    
       const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/calculate-commission`, {
         revenue: revenue,
         modelType: commissionScheme,
@@ -122,8 +123,7 @@ const CommissionCalculatorWidget: React.FC = () => {
         </button>
       </div>
       <h2 className="text-3xl font-bold text-center text-blue-900">Commission Calculator</h2>
-      <div className="text-center text-    // Verify the breakdown values
-gray-500 text-sm">
+      <div className="text-center text-gray-500 text-sm">
         <p>Enter a revenue amount and select a commission scheme to calculate your potential commission based on different bracket ranges.</p>
       </div>
       <div className='flex w-full justify-center gap-4 mb-4'>
