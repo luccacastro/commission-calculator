@@ -21,7 +21,7 @@ The widget shows a loading state while the calculation is being performed, enhan
 
 To run the project locally, you need the following installed:
 
-- [Node.js](https://nodejs.org/) (version 14 or higher)
+- [Node.js](https://nodejs.org/) (version 22 or higher)
 - [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
 - [Cypress](https://www.cypress.io/) for testing (optional)
 
