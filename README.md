@@ -1,50 +1,98 @@
-# React + TypeScript + Vite
+# Commission Calculator Widget
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a React application that provides a Commission Calculator Widget. The widget allows users to calculate their commission based on a given revenue amount using either mock data or data fetched from an API.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Toggle Data Source**: Switch between using mock data or live API data for calculations.
+- **Commission Calculation**: Calculates commission based on various revenue brackets.
+- **Loading State**: Displays loading states while waiting for API responses.
+- **Breakdown Display**: Shows a detailed breakdown of the commission earned in each revenue band.
 
-## Expanding the ESLint configuration
+## How It Works
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The Commission Calculator Widget allows users to calculate their commission based on a given revenue amount. Users can select either a mock data source or fetch data from an API to see the results. The widget consists of various components like inputs, buttons, and tables that together provide an interactive experience for the user. When you enter a revenue amount and click "Calculate", the widget processes the data according to different commission schemes and displays the total commission along with a detailed breakdown for each revenue band.
 
-- Configure the top-level `parserOptions` property like this:
+The widget shows a loading state while the calculation is being performed, enhancing the user experience by indicating when data is being fetched or processed.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Setup Instructions
+
+### Prerequisites
+
+To run the project locally, you need the following installed:
+
+- [Node.js](https://nodejs.org/) (version 14 or higher)
+- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
+- [Cypress](https://www.cypress.io/) for testing (optional)
+
+### Installation
+
+1. Clone the repository:
+
+   ```sh
+   git clone https://github.com/your-username/commission-calculator-widget.git
+   cd commission-calculator-widget
+   ```
+
+2. Install the dependencies:
+
+   ```sh
+   npm install
+   ```
+
+   or, if using Yarn:
+
+   ```sh
+   yarn install
+   ```
+
+### Running the Project
+
+To run the project in development mode:
+
+```sh
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+or, if using Yarn:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```sh
+yarn dev
 ```
+
+By default, the project runs on [http://localhost:5173](http://localhost:5173).
+
+### Running Cypress Tests
+
+To run the Cypress end-to-end tests:
+
+1. Start the development server:
+
+   ```sh
+   npm run dev
+   ```
+
+2. Open Cypress:
+
+   ```sh
+   npx cypress open
+   ```
+
+3. Run the tests from the Cypress Test Runner.
+
+## Usage
+
+Once the application is running, you can:
+
+- Enter a revenue amount.
+- Choose between different commission schemes.
+- Click "Calculate" to see the commission results and the breakdown.
+- Toggle between using mock data and fetching real data from the API.
+
+## Technologies Used
+
+- **React** with **TypeScript** for building the UI components.
+- **Axios** for making API requests.
+- **Tailwind CSS** for styling.
+- **Cypress** for end-to-end testing.
+
